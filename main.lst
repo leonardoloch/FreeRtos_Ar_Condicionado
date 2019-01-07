@@ -1,0 +1,155 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 6469 7370 		.string	"display"
+  18      6C61 7900 
+  19               	.LC1:
+  20 0008 6D6F 6469 		.string	"modificar_temp"
+  20      6669 6361 
+  20      725F 7465 
+  20      6D70 00
+  21               	.LC2:
+  22 0017 7665 7269 		.string	"verificarInput"
+  22      6669 6361 
+  22      7249 6E70 
+  22      7574 00
+  23               		.text
+  24               	.global	main
+  26               	main:
+  27               	.LFB2:
+  28               	.LM1:
+  29 0000 AF92      		push r10
+  30 0002 BF92      		push r11
+  31 0004 CF92      		push r12
+  32 0006 DF92      		push r13
+  33 0008 EF92      		push r14
+  34 000a FF92      		push r15
+  35 000c 0F93      		push r16
+  36               	/* prologue: function */
+  37               	/* frame size = 0 */
+  38               	.LM2:
+  39 000e 88E3      		ldi r24,lo8(56)
+  40 0010 84B9      		out 36-32,r24
+  41               	.LM3:
+  42 0012 8CEF      		ldi r24,lo8(-4)
+  43 0014 8AB9      		out 42-32,r24
+  44               	.LM4:
+  45 0016 8FE4      		ldi r24,lo8(79)
+  46 0018 87B9      		out 39-32,r24
+  47               	.LM5:
+  48 001a 81E0      		ldi r24,lo8(1)
+  49 001c 61E0      		ldi r22,lo8(1)
+  50 001e 0E94 0000 		call xQueueCreateCountingSemaphore
+  51 0022 9093 0000 		sts (semInput)+1,r25
+  52 0026 8093 0000 		sts semInput,r24
+  53               	.LM6:
+  54 002a 81E0      		ldi r24,lo8(1)
+  55 002c 60E0      		ldi r22,lo8(0)
+  56 002e 0E94 0000 		call xQueueCreateCountingSemaphore
+  57 0032 9093 0000 		sts (semMotor)+1,r25
+  58 0036 8093 0000 		sts semMotor,r24
+  59               	.LM7:
+  60 003a 0E94 0000 		call set_pwm
+  61               	.LM8:
+  62 003e 8AE0      		ldi r24,lo8(10)
+  63 0040 62E0      		ldi r22,lo8(2)
+  64 0042 40E0      		ldi r20,lo8(0)
+  65 0044 0E94 0000 		call xQueueGenericCreate
+  66 0048 9093 0000 		sts (channel_temp)+1,r25
+  67 004c 8093 0000 		sts channel_temp,r24
+  68               	.LM9:
+  69 0050 8AE0      		ldi r24,lo8(10)
+  70 0052 62E0      		ldi r22,lo8(2)
+  71 0054 40E0      		ldi r20,lo8(0)
+  72 0056 0E94 0000 		call xQueueGenericCreate
+  73 005a 9093 0000 		sts (mensagens)+1,r25
+  74 005e 8093 0000 		sts mensagens,r24
+  75               	.LM10:
+  76 0062 80E0      		ldi r24,lo8(gs(display))
+  77 0064 90E0      		ldi r25,hi8(gs(display))
+  78 0066 60E0      		ldi r22,lo8(.LC0)
+  79 0068 70E0      		ldi r23,hi8(.LC0)
+  80 006a 44E6      		ldi r20,lo8(100)
+  81 006c 50E0      		ldi r21,hi8(100)
+  82 006e 20E0      		ldi r18,lo8(0)
+  83 0070 30E0      		ldi r19,hi8(0)
+  84 0072 04E0      		ldi r16,lo8(4)
+  85 0074 EE24      		clr r14
+  86 0076 FF24      		clr r15
+  87 0078 CC24      		clr r12
+  88 007a DD24      		clr r13
+  89 007c AA24      		clr r10
+  90 007e BB24      		clr r11
+  91 0080 0E94 0000 		call xTaskGenericCreate
+  92               	.LM11:
+  93 0084 80E0      		ldi r24,lo8(gs(modificar_temp))
+  94 0086 90E0      		ldi r25,hi8(gs(modificar_temp))
+  95 0088 60E0      		ldi r22,lo8(.LC1)
+  96 008a 70E0      		ldi r23,hi8(.LC1)
+  97 008c 44E6      		ldi r20,lo8(100)
+  98 008e 50E0      		ldi r21,hi8(100)
+  99 0090 20E0      		ldi r18,lo8(0)
+ 100 0092 30E0      		ldi r19,hi8(0)
+ 101 0094 0E94 0000 		call xTaskGenericCreate
+ 102               	.LM12:
+ 103 0098 80E0      		ldi r24,lo8(gs(verificarInput))
+ 104 009a 90E0      		ldi r25,hi8(gs(verificarInput))
+ 105 009c 60E0      		ldi r22,lo8(.LC2)
+ 106 009e 70E0      		ldi r23,hi8(.LC2)
+ 107 00a0 44E6      		ldi r20,lo8(100)
+ 108 00a2 50E0      		ldi r21,hi8(100)
+ 109 00a4 20E0      		ldi r18,lo8(0)
+ 110 00a6 30E0      		ldi r19,hi8(0)
+ 111 00a8 0E94 0000 		call xTaskGenericCreate
+ 112               	.LM13:
+ 113 00ac 0E94 0000 		call vTaskStartScheduler
+ 114               	.LM14:
+ 115 00b0 80E0      		ldi r24,lo8(0)
+ 116 00b2 90E0      		ldi r25,hi8(0)
+ 117               	/* epilogue start */
+ 118 00b4 0F91      		pop r16
+ 119 00b6 FF90      		pop r15
+ 120 00b8 EF90      		pop r14
+ 121 00ba DF90      		pop r13
+ 122 00bc CF90      		pop r12
+ 123 00be BF90      		pop r11
+ 124 00c0 AF90      		pop r10
+ 125 00c2 0895      		ret
+ 126               	.LFE2:
+ 128               		.comm semMotor,2,1
+ 129               		.comm semInput,2,1
+ 130               		.comm mensagens,2,1
+ 131               		.comm channel_temp,2,1
+ 156               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:2      *ABS*:0000003f __SREG__
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:3      *ABS*:0000003e __SP_H__
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:4      *ABS*:0000003d __SP_L__
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:5      *ABS*:00000034 __CCP__
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\leonardo\AppData\Local\Temp/ccJ3QeId.s:26     .text:00000000 main
+                            *COM*:00000002 semInput
+                            *COM*:00000002 semMotor
+                            *COM*:00000002 channel_temp
+                            *COM*:00000002 mensagens
+
+UNDEFINED SYMBOLS
+xQueueCreateCountingSemaphore
+set_pwm
+xQueueGenericCreate
+display
+xTaskGenericCreate
+modificar_temp
+verificarInput
+vTaskStartScheduler
+__do_copy_data
+__do_clear_bss

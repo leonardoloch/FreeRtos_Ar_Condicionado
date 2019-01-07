@@ -1,0 +1,470 @@
+   1               		.file	"tarefa.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	mostraDisplay
+  18               	mostraDisplay:
+  19               	.LFB5:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0000 94E0      		ldi r25,4
+  26 0002 660F      	1:	lsl r22
+  27 0004 771F      		rol r23
+  28 0006 9A95      		dec r25
+  29 0008 01F4      		brne 1b
+  30               	.LVL1:
+  31 000a 862B      		or r24,r22
+  32               	.LVL2:
+  33 000c 88B9      		out 40-32,r24
+  34               	/* epilogue start */
+  35               	.LM3:
+  36 000e 0895      		ret
+  37               	.LFE5:
+  39               	.global	PWM1_value
+  41               	PWM1_value:
+  42               	.LFB6:
+  43               	.LM4:
+  44               	/* prologue: function */
+  45               	/* frame size = 0 */
+  46               	.LVL3:
+  47               	.L4:
+  48               	.LM5:
+  49 0010 8093 B300 		sts 179,r24
+  50               	.LM6:
+  51 0014 6093 B400 		sts 180,r22
+  52 0018 00C0      		rjmp .L4
+  53               	.LFE6:
+  55               	.global	valor_res_motor
+  57               	valor_res_motor:
+  58               	.LFB7:
+  59               	.LM7:
+  60               	.LVL4:
+  61               	/* prologue: function */
+  62               	/* frame size = 0 */
+  63 001a 9C01      		movw r18,r24
+  64               	.LM8:
+  65 001c 8431      		cpi r24,20
+  66 001e 9105      		cpc r25,__zero_reg__
+  67 0020 00F0      		brlo .L7
+  68               	.LM9:
+  69 0022 44E0      		ldi r20,4
+  70 0024 880F      	1:	lsl r24
+  71 0026 991F      		rol r25
+  72 0028 4A95      		dec r20
+  73 002a 01F4      		brne 1b
+  74               	.LVL5:
+  75 002c 821B      		sub r24,r18
+  76 002e 930B      		sbc r25,r19
+  77 0030 8659      		subi r24,lo8(-(106))
+  78 0032 8093 B300 		sts 179,r24
+  79               	.LM10:
+  80 0036 8093 B400 		sts 180,r24
+  81 003a 0895      		ret
+  82               	.LVL6:
+  83               	.L7:
+  84               	.LM11:
+  85 003c 86EF      		ldi r24,lo8(-10)
+  86 003e 9FEF      		ldi r25,hi8(-10)
+  87               	.LVL7:
+  88 0040 AC01      		movw r20,r24
+  89 0042 249F      		mul r18,r20
+  90 0044 C001      		movw r24,r0
+  91 0046 259F      		mul r18,r21
+  92 0048 900D      		add r25,r0
+  93 004a 349F      		mul r19,r20
+  94 004c 900D      		add r25,r0
+  95 004e 1124      		clr r1
+  96 0050 8650      		subi r24,lo8(-(-6))
+  97 0052 8093 B300 		sts 179,r24
+  98               	.LM12:
+  99 0056 1092 B400 		sts 180,__zero_reg__
+ 100 005a 0895      		ret
+ 101               	.LFE7:
+ 103               	.global	map
+ 105               	map:
+ 106               	.LFB8:
+ 107               	.LM13:
+ 108               	.LVL8:
+ 109 005c 0F93      		push r16
+ 110               	.LVL9:
+ 111 005e 1F93      		push r17
+ 112               	/* prologue: function */
+ 113               	/* frame size = 0 */
+ 114               	.LM14:
+ 115 0060 021B      		sub r16,r18
+ 116 0062 130B      		sbc r17,r19
+ 117               	.LVL10:
+ 118 0064 861B      		sub r24,r22
+ 119 0066 970B      		sbc r25,r23
+ 120               	.LVL11:
+ 121 0068 461B      		sub r20,r22
+ 122 006a 570B      		sbc r21,r23
+ 123               	.LVL12:
+ 124 006c BC01      		movw r22,r24
+ 125               	.LVL13:
+ 126 006e 069F      		mul r16,r22
+ 127 0070 C001      		movw r24,r0
+ 128 0072 079F      		mul r16,r23
+ 129 0074 900D      		add r25,r0
+ 130 0076 169F      		mul r17,r22
+ 131 0078 900D      		add r25,r0
+ 132 007a 1124      		clr r1
+ 133 007c BA01      		movw r22,r20
+ 134 007e 0E94 0000 		call __divmodhi4
+ 135 0082 620F      		add r22,r18
+ 136 0084 731F      		adc r23,r19
+ 137               	.LM15:
+ 138 0086 CB01      		movw r24,r22
+ 139               	/* epilogue start */
+ 140 0088 1F91      		pop r17
+ 141 008a 0F91      		pop r16
+ 142               	.LVL14:
+ 143 008c 0895      		ret
+ 144               	.LFE8:
+ 146               	.global	display
+ 148               	display:
+ 149               	.LFB3:
+ 150               	.LM16:
+ 151 008e FF92      		push r15
+ 152 0090 0F93      		push r16
+ 153 0092 1F93      		push r17
+ 154 0094 DF93      		push r29
+ 155 0096 CF93      		push r28
+ 156 0098 00D0      		rcall .
+ 157 009a CDB7      		in r28,__SP_L__
+ 158 009c DEB7      		in r29,__SP_H__
+ 159               	/* prologue: function */
+ 160               	/* frame size = 2 */
+ 161               	.LM17:
+ 162 009e 1A82      		std Y+2,__zero_reg__
+ 163 00a0 1982      		std Y+1,__zero_reg__
+ 164               	.LVL15:
+ 165               	.LBB6:
+ 166               	.LBB7:
+ 167               	.LM18:
+ 168 00a2 18B8      		out 40-32,__zero_reg__
+ 169               	.LBE7:
+ 170               	.LBE6:
+ 171               	.LM19:
+ 172 00a4 8E01      		movw r16,r28
+ 173 00a6 0F5F      		subi r16,lo8(-(1))
+ 174 00a8 1F4F      		sbci r17,hi8(-(1))
+ 175               	.LM20:
+ 176 00aa 60E2      		ldi r22,lo8(32)
+ 177 00ac F62E      		mov r15,r22
+ 178               	.L15:
+ 179               	.LM21:
+ 180 00ae 8091 0000 		lds r24,mensagens
+ 181 00b2 9091 0000 		lds r25,(mensagens)+1
+ 182 00b6 B801      		movw r22,r16
+ 183 00b8 4AE0      		ldi r20,lo8(10)
+ 184 00ba 50E0      		ldi r21,hi8(10)
+ 185 00bc 20E0      		ldi r18,lo8(0)
+ 186 00be 0E94 0000 		call xQueueGenericReceive
+ 187 00c2 8823      		tst r24
+ 188 00c4 01F0      		breq .L13
+ 189               	.LM22:
+ 190 00c6 8BB1      		in r24,43-32
+ 191 00c8 8F25      		eor r24,r15
+ 192 00ca 8BB9      		out 43-32,r24
+ 193               	.L13:
+ 194               	.LM23:
+ 195 00cc E981      		ldd r30,Y+1
+ 196 00ce FA81      		ldd r31,Y+2
+ 197 00d0 E530      		cpi r30,5
+ 198 00d2 F105      		cpc r31,__zero_reg__
+ 199 00d4 01F4      		brne .L14
+ 200 00d6 8BB1      		in r24,43-32
+ 201 00d8 8F25      		eor r24,r15
+ 202 00da 8BB9      		out 43-32,r24
+ 203               	.L14:
+ 204               	.LBB8:
+ 205               	.LBB9:
+ 206               	.LM24:
+ 207 00dc CF01      		movw r24,r30
+ 208 00de 6AE0      		ldi r22,lo8(10)
+ 209 00e0 70E0      		ldi r23,hi8(10)
+ 210 00e2 0E94 0000 		call __divmodhi4
+ 211 00e6 9B01      		movw r18,r22
+ 212 00e8 54E0      		ldi r21,4
+ 213 00ea 220F      	1:	lsl r18
+ 214 00ec 331F      		rol r19
+ 215 00ee 5A95      		dec r21
+ 216 00f0 01F4      		brne 1b
+ 217 00f2 CF01      		movw r24,r30
+ 218 00f4 6AE0      		ldi r22,lo8(10)
+ 219 00f6 70E0      		ldi r23,hi8(10)
+ 220 00f8 0E94 0000 		call __divmodhi4
+ 221 00fc 822B      		or r24,r18
+ 222 00fe 88B9      		out 40-32,r24
+ 223               	.LBE9:
+ 224               	.LBE8:
+ 225               	.LM25:
+ 226 0100 84E1      		ldi r24,lo8(20)
+ 227 0102 90E0      		ldi r25,hi8(20)
+ 228 0104 0E94 0000 		call vTaskDelay
+ 229 0108 00C0      		rjmp .L15
+ 230               	.LFE3:
+ 232               	.global	modificar_temp
+ 234               	modificar_temp:
+ 235               	.LFB4:
+ 236               	.LM26:
+ 237 010a FF92      		push r15
+ 238 010c 0F93      		push r16
+ 239 010e 1F93      		push r17
+ 240 0110 DF93      		push r29
+ 241 0112 CF93      		push r28
+ 242 0114 00D0      		rcall .
+ 243 0116 CDB7      		in r28,__SP_L__
+ 244 0118 DEB7      		in r29,__SP_H__
+ 245               	/* prologue: function */
+ 246               	/* frame size = 2 */
+ 247               	.LM27:
+ 248 011a 1A82      		std Y+2,__zero_reg__
+ 249 011c 1982      		std Y+1,__zero_reg__
+ 250               	.LVL16:
+ 251               	.LM28:
+ 252 011e 70E1      		ldi r23,lo8(16)
+ 253 0120 F72E      		mov r15,r23
+ 254               	.LM29:
+ 255 0122 8E01      		movw r16,r28
+ 256 0124 0F5F      		subi r16,lo8(-(1))
+ 257 0126 1F4F      		sbci r17,hi8(-(1))
+ 258               	.L18:
+ 259               	.LM30:
+ 260 0128 8091 0000 		lds r24,semMotor
+ 261 012c 9091 0000 		lds r25,(semMotor)+1
+ 262 0130 60E0      		ldi r22,lo8(0)
+ 263 0132 70E0      		ldi r23,hi8(0)
+ 264 0134 4FEF      		ldi r20,lo8(-1)
+ 265 0136 5FEF      		ldi r21,hi8(-1)
+ 266 0138 20E0      		ldi r18,lo8(0)
+ 267 013a 0E94 0000 		call xQueueGenericReceive
+ 268               	.LM31:
+ 269 013e 8BB1      		in r24,43-32
+ 270 0140 8F25      		eor r24,r15
+ 271 0142 8BB9      		out 43-32,r24
+ 272               	.LM32:
+ 273 0144 85E0      		ldi r24,lo8(5)
+ 274 0146 90E0      		ldi r25,hi8(5)
+ 275 0148 0E94 0000 		call vTaskDelay
+ 276               	.LM33:
+ 277 014c 8091 0000 		lds r24,channel_temp
+ 278 0150 9091 0000 		lds r25,(channel_temp)+1
+ 279 0154 B801      		movw r22,r16
+ 280 0156 4AE0      		ldi r20,lo8(10)
+ 281 0158 50E0      		ldi r21,hi8(10)
+ 282 015a 20E0      		ldi r18,lo8(0)
+ 283 015c 0E94 0000 		call xQueueGenericReceive
+ 284               	.LM34:
+ 285 0160 8981      		ldd r24,Y+1
+ 286 0162 9A81      		ldd r25,Y+2
+ 287 0164 0E94 0000 		call valor_res_motor
+ 288               	.LM35:
+ 289 0168 8091 0000 		lds r24,semInput
+ 290 016c 9091 0000 		lds r25,(semInput)+1
+ 291 0170 60E0      		ldi r22,lo8(0)
+ 292 0172 70E0      		ldi r23,hi8(0)
+ 293 0174 40E0      		ldi r20,lo8(0)
+ 294 0176 50E0      		ldi r21,hi8(0)
+ 295 0178 20E0      		ldi r18,lo8(0)
+ 296 017a 0E94 0000 		call xQueueGenericSend
+ 297 017e 00C0      		rjmp .L18
+ 298               	.LFE4:
+ 300               	.global	verificarInput
+ 302               	verificarInput:
+ 303               	.LFB2:
+ 304               	.LM36:
+ 305 0180 BF92      		push r11
+ 306 0182 CF92      		push r12
+ 307 0184 DF92      		push r13
+ 308 0186 EF92      		push r14
+ 309 0188 FF92      		push r15
+ 310 018a 0F93      		push r16
+ 311 018c 1F93      		push r17
+ 312 018e DF93      		push r29
+ 313 0190 CF93      		push r28
+ 314 0192 00D0      		rcall .
+ 315 0194 00D0      		rcall .
+ 316 0196 CDB7      		in r28,__SP_L__
+ 317 0198 DEB7      		in r29,__SP_H__
+ 318               	/* prologue: function */
+ 319               	/* frame size = 4 */
+ 320               	.LM37:
+ 321 019a 8AB1      		in r24,42-32
+ 322 019c 8AB9      		out 42-32,r24
+ 323               	.LM38:
+ 324 019e 1A82      		std Y+2,__zero_reg__
+ 325 01a0 1982      		std Y+1,__zero_reg__
+ 326               	.LVL17:
+ 327 01a2 1C82      		std Y+4,__zero_reg__
+ 328 01a4 1B82      		std Y+3,__zero_reg__
+ 329               	.LVL18:
+ 330               	.LM39:
+ 331 01a6 8E01      		movw r16,r28
+ 332 01a8 0F5F      		subi r16,lo8(-(1))
+ 333 01aa 1F4F      		sbci r17,hi8(-(1))
+ 334               	.LM40:
+ 335 01ac AFEF      		ldi r26,lo8(511)
+ 336 01ae CA2E      		mov r12,r26
+ 337 01b0 A1E0      		ldi r26,hi8(511)
+ 338 01b2 DA2E      		mov r13,r26
+ 339               	.LM41:
+ 340 01b4 F3E0      		ldi r31,lo8(3)
+ 341 01b6 EF2E      		mov r14,r31
+ 342 01b8 F12C      		mov r15,__zero_reg__
+ 343 01ba EC0E      		add r14,r28
+ 344 01bc FD1E      		adc r15,r29
+ 345               	.LM42:
+ 346 01be E4E0      		ldi r30,lo8(4)
+ 347 01c0 BE2E      		mov r11,r30
+ 348               	.L26:
+ 349               	.LM43:
+ 350 01c2 8BB1      		in r24,43-32
+ 351 01c4 1BB8      		out 43-32,__zero_reg__
+ 352               	.LM44:
+ 353 01c6 4899      		sbic 41-32,0
+ 354 01c8 00C0      		rjmp .L21
+ 355               	.LM45:
+ 356 01ca 5E9A      		sbi 43-32,6
+ 357               	.LM46:
+ 358 01cc 8981      		ldd r24,Y+1
+ 359 01ce 9A81      		ldd r25,Y+2
+ 360 01d0 8832      		cpi r24,40
+ 361 01d2 9105      		cpc r25,__zero_reg__
+ 362 01d4 04F4      		brge .L22
+ 363               	.LM47:
+ 364 01d6 0196      		adiw r24,1
+ 365 01d8 9A83      		std Y+2,r25
+ 366 01da 8983      		std Y+1,r24
+ 367               	.LVL19:
+ 368               	.L22:
+ 369               	.LM48:
+ 370 01dc 8091 0000 		lds r24,mensagens
+ 371 01e0 9091 0000 		lds r25,(mensagens)+1
+ 372 01e4 B801      		movw r22,r16
+ 373 01e6 40ED      		ldi r20,lo8(2000)
+ 374 01e8 57E0      		ldi r21,hi8(2000)
+ 375 01ea 20E0      		ldi r18,lo8(0)
+ 376 01ec 0E94 0000 		call xQueueGenericSend
+ 377               	.LM49:
+ 378 01f0 82E3      		ldi r24,lo8(50)
+ 379 01f2 90E0      		ldi r25,hi8(50)
+ 380 01f4 0E94 0000 		call vTaskDelay
+ 381               	.L21:
+ 382               	.LM50:
+ 383 01f8 4999      		sbic 41-32,1
+ 384 01fa 00C0      		rjmp .L23
+ 385               	.LM51:
+ 386 01fc 5E9A      		sbi 43-32,6
+ 387               	.LM52:
+ 388 01fe 8981      		ldd r24,Y+1
+ 389 0200 9A81      		ldd r25,Y+2
+ 390 0202 0097      		sbiw r24,0
+ 391 0204 01F0      		breq .L24
+ 392               	.LM53:
+ 393 0206 0197      		sbiw r24,1
+ 394 0208 9A83      		std Y+2,r25
+ 395 020a 8983      		std Y+1,r24
+ 396               	.LVL20:
+ 397               	.L24:
+ 398               	.LM54:
+ 399 020c 8091 0000 		lds r24,mensagens
+ 400 0210 9091 0000 		lds r25,(mensagens)+1
+ 401 0214 B801      		movw r22,r16
+ 402 0216 40ED      		ldi r20,lo8(2000)
+ 403 0218 57E0      		ldi r21,hi8(2000)
+ 404 021a 20E0      		ldi r18,lo8(0)
+ 405 021c 0E94 0000 		call xQueueGenericSend
+ 406               	.LM55:
+ 407 0220 82E3      		ldi r24,lo8(50)
+ 408 0222 90E0      		ldi r25,hi8(50)
+ 409 0224 0E94 0000 		call vTaskDelay
+ 410               	.L23:
+ 411               	.LM56:
+ 412 0228 DC82      		std Y+4,r13
+ 413 022a CB82      		std Y+3,r12
+ 414               	.LVL21:
+ 415               	.LM57:
+ 416 022c 8981      		ldd r24,Y+1
+ 417 022e 9A81      		ldd r25,Y+2
+ 418 0230 8F5F      		subi r24,lo8(511)
+ 419 0232 9140      		sbci r25,hi8(511)
+ 420 0234 01F0      		breq .L25
+ 421               	.LVL22:
+ 422               	.LM58:
+ 423 0236 8091 0000 		lds r24,semInput
+ 424 023a 9091 0000 		lds r25,(semInput)+1
+ 425               	.LVL23:
+ 426 023e 60E0      		ldi r22,lo8(0)
+ 427 0240 70E0      		ldi r23,hi8(0)
+ 428 0242 4FEF      		ldi r20,lo8(-1)
+ 429 0244 5FEF      		ldi r21,hi8(-1)
+ 430 0246 20E0      		ldi r18,lo8(0)
+ 431 0248 0E94 0000 		call xQueueGenericReceive
+ 432               	.LM59:
+ 433 024c 85E0      		ldi r24,lo8(5)
+ 434 024e 90E0      		ldi r25,hi8(5)
+ 435 0250 0E94 0000 		call vTaskDelay
+ 436               	.LM60:
+ 437 0254 8091 0000 		lds r24,channel_temp
+ 438 0258 9091 0000 		lds r25,(channel_temp)+1
+ 439 025c B701      		movw r22,r14
+ 440 025e 4AE0      		ldi r20,lo8(10)
+ 441 0260 50E0      		ldi r21,hi8(10)
+ 442 0262 20E0      		ldi r18,lo8(0)
+ 443 0264 0E94 0000 		call xQueueGenericSend
+ 444               	.LM61:
+ 445 0268 8091 0000 		lds r24,semMotor
+ 446 026c 9091 0000 		lds r25,(semMotor)+1
+ 447 0270 60E0      		ldi r22,lo8(0)
+ 448 0272 70E0      		ldi r23,hi8(0)
+ 449 0274 40E0      		ldi r20,lo8(0)
+ 450 0276 50E0      		ldi r21,hi8(0)
+ 451 0278 20E0      		ldi r18,lo8(0)
+ 452 027a 0E94 0000 		call xQueueGenericSend
+ 453               	.LM62:
+ 454 027e 8BB1      		in r24,43-32
+ 455 0280 8B25      		eor r24,r11
+ 456 0282 8BB9      		out 43-32,r24
+ 457               	.LVL24:
+ 458               	.L25:
+ 459               	.LM63:
+ 460 0284 84E1      		ldi r24,lo8(20)
+ 461 0286 90E0      		ldi r25,hi8(20)
+ 462 0288 0E94 0000 		call vTaskDelay
+ 463 028c 00C0      		rjmp .L26
+ 464               	.LFE2:
+ 538               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 tarefa.c
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:2      *ABS*:0000003f __SREG__
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:3      *ABS*:0000003e __SP_H__
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:4      *ABS*:0000003d __SP_L__
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:5      *ABS*:00000034 __CCP__
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:18     .text:00000000 mostraDisplay
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:41     .text:00000010 PWM1_value
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:57     .text:0000001a valor_res_motor
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:105    .text:0000005c map
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:148    .text:0000008e display
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:234    .text:0000010a modificar_temp
+C:\Users\leonardo\AppData\Local\Temp/ccTMwswB.s:302    .text:00000180 verificarInput
+
+UNDEFINED SYMBOLS
+__divmodhi4
+mensagens
+xQueueGenericReceive
+vTaskDelay
+semMotor
+channel_temp
+semInput
+xQueueGenericSend
