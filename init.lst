@@ -1,0 +1,167 @@
+   1               		.file	"init.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	adc_init
+  18               	adc_init:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 EAE7      		ldi r30,lo8(122)
+  25 0002 F0E0      		ldi r31,hi8(122)
+  26 0004 8081      		ld r24,Z
+  27 0006 8760      		ori r24,lo8(7)
+  28 0008 8083      		st Z,r24
+  29               	.LM3:
+  30 000a ACE7      		ldi r26,lo8(124)
+  31 000c B0E0      		ldi r27,hi8(124)
+  32 000e 8C91      		ld r24,X
+  33 0010 8064      		ori r24,lo8(64)
+  34 0012 8C93      		st X,r24
+  35               	.LM4:
+  36 0014 8081      		ld r24,Z
+  37 0016 8068      		ori r24,lo8(-128)
+  38 0018 8083      		st Z,r24
+  39               	.LM5:
+  40 001a 8081      		ld r24,Z
+  41 001c 8064      		ori r24,lo8(64)
+  42 001e 8083      		st Z,r24
+  43               	/* epilogue start */
+  44               	.LM6:
+  45 0020 0895      		ret
+  46               	.LFE2:
+  48               	.global	read_adc
+  50               	read_adc:
+  51               	.LFB3:
+  52               	.LM7:
+  53               	.LVL0:
+  54               	/* prologue: function */
+  55               	/* frame size = 0 */
+  56               	.LM8:
+  57 0022 9091 7C00 		lds r25,124
+  58 0026 907F      		andi r25,lo8(-16)
+  59 0028 9093 7C00 		sts 124,r25
+  60               	.LM9:
+  61 002c 9091 7C00 		lds r25,124
+  62 0030 982B      		or r25,r24
+  63 0032 9093 7C00 		sts 124,r25
+  64               	.LM10:
+  65 0036 8091 7A00 		lds r24,122
+  66               	.LVL1:
+  67 003a 8064      		ori r24,lo8(64)
+  68 003c 8093 7A00 		sts 122,r24
+  69 0040 00C0      		rjmp .L4
+  70               	.L5:
+  71               	.LM11:
+  72 0042 8BB1      		in r24,43-32
+  73 0044 8058      		subi r24,lo8(-(-128))
+  74 0046 8BB9      		out 43-32,r24
+  75               	.L4:
+  76               	.LM12:
+  77 0048 8091 7A00 		lds r24,122
+  78 004c 86FD      		sbrc r24,6
+  79 004e 00C0      		rjmp .L5
+  80               	.LM13:
+  81 0050 2091 7800 		lds r18,120
+  82 0054 3091 7900 		lds r19,(120)+1
+  83               	.LM14:
+  84 0058 C901      		movw r24,r18
+  85               	/* epilogue start */
+  86 005a 0895      		ret
+  87               	.LFE3:
+  89               	.global	adc_read
+  91               	adc_read:
+  92               	.LFB4:
+  93               	.LM15:
+  94               	.LVL2:
+  95               	/* prologue: function */
+  96               	/* frame size = 0 */
+  97               	.LM16:
+  98 005c 9091 7C00 		lds r25,124
+  99 0060 8770      		andi r24,lo8(7)
+ 100               	.LVL3:
+ 101 0062 987F      		andi r25,lo8(-8)
+ 102 0064 892B      		or r24,r25
+ 103 0066 8093 7C00 		sts 124,r24
+ 104               	.LM17:
+ 105 006a 8091 7A00 		lds r24,122
+ 106 006e 8064      		ori r24,lo8(64)
+ 107 0070 8093 7A00 		sts 122,r24
+ 108               	.LM18:
+ 109 0074 8BB1      		in r24,43-32
+ 110 0076 8058      		subi r24,lo8(-(-128))
+ 111 0078 8BB9      		out 43-32,r24
+ 112               	.L8:
+ 113               	.LM19:
+ 114 007a 8091 7A00 		lds r24,122
+ 115 007e 86FD      		sbrc r24,6
+ 116 0080 00C0      		rjmp .L8
+ 117               	.LM20:
+ 118 0082 2091 7800 		lds r18,120
+ 119 0086 3091 7900 		lds r19,(120)+1
+ 120               	.LM21:
+ 121 008a C901      		movw r24,r18
+ 122               	/* epilogue start */
+ 123 008c 0895      		ret
+ 124               	.LFE4:
+ 126               	.global	adc_init1
+ 128               	adc_init1:
+ 129               	.LFB5:
+ 130               	.LM22:
+ 131               	/* prologue: function */
+ 132               	/* frame size = 0 */
+ 133               	.LM23:
+ 134 008e 80E4      		ldi r24,lo8(64)
+ 135 0090 8093 7C00 		sts 124,r24
+ 136               	.LM24:
+ 137 0094 87E8      		ldi r24,lo8(-121)
+ 138 0096 8093 7A00 		sts 122,r24
+ 139               	/* epilogue start */
+ 140               	.LM25:
+ 141 009a 0895      		ret
+ 142               	.LFE5:
+ 144               	.global	set_pwm
+ 146               	set_pwm:
+ 147               	.LFB6:
+ 148               	.LM26:
+ 149               	/* prologue: function */
+ 150               	/* frame size = 0 */
+ 151               	.LM27:
+ 152 009c E1EB      		ldi r30,lo8(177)
+ 153 009e F0E0      		ldi r31,hi8(177)
+ 154 00a0 8081      		ld r24,Z
+ 155 00a2 8460      		ori r24,lo8(4)
+ 156 00a4 8083      		st Z,r24
+ 157               	.LM28:
+ 158 00a6 83EA      		ldi r24,lo8(-93)
+ 159 00a8 8093 B000 		sts 176,r24
+ 160               	.LM29:
+ 161 00ac 539A      		sbi 42-32,3
+ 162               	.LM30:
+ 163 00ae 239A      		sbi 36-32,3
+ 164               	/* epilogue start */
+ 165               	.LM31:
+ 166 00b0 0895      		ret
+ 167               	.LFE6:
+ 225               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 init.c
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:2      *ABS*:0000003f __SREG__
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:3      *ABS*:0000003e __SP_H__
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:4      *ABS*:0000003d __SP_L__
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:5      *ABS*:00000034 __CCP__
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:18     .text:00000000 adc_init
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:50     .text:00000022 read_adc
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:91     .text:0000005c adc_read
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:128    .text:0000008e adc_init1
+C:\Users\leonardo\AppData\Local\Temp/ccmvVYE4.s:146    .text:0000009c set_pwm
+
+NO UNDEFINED SYMBOLS
